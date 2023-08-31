@@ -5,7 +5,7 @@ function DeleteIcon({ onDelete }) {
   return (
     <TodoIcon
       type="delete"
-      color="gray"
+      color="gray" // hover style on css file
       onClick={onDelete}
     />
   );
