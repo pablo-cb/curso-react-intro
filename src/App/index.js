@@ -1,11 +1,8 @@
-import { TodoCounter } from "../TodoCounter";
-import { TodoSearch } from "../TodoSearch";
-import { TodoList } from "../TodoList";
-import { TodoItem } from "../TodoItem";
-import { CreateTodoButton } from "../CreateTodoButton";
 import React from "react";
+import { AppUI } from "./AppUI";
 import { useLocalStorage } from "./useLocalStorage"
 
+// localStorage.removeItem('TODOS_V1', defaultTodos);
 // const defaultTodos = [
 //   { text: "Cortar cebolla", completed: true },
 //   { text: "Tomar el Curso de Intro a React.js", completed: false },
@@ -14,11 +11,16 @@ import { useLocalStorage } from "./useLocalStorage"
 // ];
 
 // localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
-// localStorage.removeItem('TODOS_V1', defaultTodos);
 
 
 function App() {
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
+  // const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error
+  } = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState("");
 
   console.log("Los usuarios buscan todos de " + searchValue);
@@ -54,32 +56,21 @@ function App() {
     newTodos.splice(todoIndex, 1);
     saveTodos(newTodos);
   };
+
   return (
-    <>
-      <TodoCounter
-        total={totalTodos}
-        completed={completedTodos}
-      />
-      <TodoSearch
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
-
-      <TodoList>
-        {searchedTodos.map((todo) => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
-          />
-        ))}
-      </TodoList>
-
-      <CreateTodoButton />
-    </>
+    <AppUI
+      loading={loading}
+      error={error}
+      completedTodos={completedTodos}
+      totalTodos={totalTodos}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      searchedTodos={searchedTodos}
+      completeTodo={completeTodo}
+      deleteTodo={deleteTodo}
+    />
   );
+
 }
 
 export default App;
