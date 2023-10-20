@@ -9,7 +9,6 @@ function TodoForm() {
     } = React.useContext(TodoContext);
 
     const [newTodoValue, setNewTodoValue] = React.useState('');
-``
     const onSubmit = (event) => {
         event.preventDefault();
         addTodo(newTodoValue);
