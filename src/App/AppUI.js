@@ -37,7 +37,7 @@ function AppUI () {
                     </>
                 ) } {/*Loading*/}
                 {error && <TodosError/>} {/*ERROR*/}
-                {(!loading && searchedTodos.length == 0) && <EmptyTodos/>} 
+                {(!loading && searchedTodos.length === 0) && <EmptyTodos/>} 
 
 
                 {searchedTodos.map((todo) => (
