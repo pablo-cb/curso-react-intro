@@ -20,7 +20,7 @@ function CreateTodoButton() {
         console.log(event.target);
         // setOpenModal(!openModal); // Mi solución
         setOpenModal(state => !state)
-        
+         
       }}
     >
       +
